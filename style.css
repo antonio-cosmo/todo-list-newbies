@@ -7,7 +7,7 @@
     --gray-400: #363636;
     --gray-500: #222222;
     --black: #1a1a1a;
-  
+
     --blue-500: #4E6EDE;
     --blue-600: #3352C3;
     --green-500: #26C277;
@@ -15,22 +15,40 @@
     --yellow-500: #FFD231;
     --yellow-700: #644f04;
     --red-500: #DE4E4E;
-  }
+}
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 
     text-decoration: none;
 }
-  body{
+
+body {
     background: var(--gray-500);
     color: var(--white);
-  }
+}
 
-  body, input, button {
+body,
+input,
+button {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 1rem;
-  }
+}
+
+.wrapper {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 0 1rem 5rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    padding: calc(6.75rem - 2rem) 0;
+}
