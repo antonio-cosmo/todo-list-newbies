@@ -3,23 +3,61 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
-            rel="stylesheet">
-
+            rel="stylesheet"
+            />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/bold/style.css"
+            />
         <link rel="stylesheet" href="./style.css">
 
         <title>ToDo List Newbies</title>
     </head>
     <body>
-        <div class="wrapper">
+        <section class="wrapper">
             <header>
                 <img src="./assets/todo-log.svg" alt="logo" />
             </header>
-            <main></main>
+            <main>
+
+                <form class="new_task_form">
+                    <input type="text" placeholder="Adicione uma nova tarefa">
+                    <button type="submit">
+                        Criar <i class="ph-bold ph-plus-circle"></i>
+                    </button>
+                </form>
+
+                <section class="tasks_counter">
+                    <p>
+                        <strong>Tarefas criadas</strong>
+                        <span>2</span>
+                    </p>
+                    <p>
+                        <strong>Concluídas</strong>
+                        <span>2</span>
+                    </p>
+                </section>
+
+                <section class="empty_tasks">
+                    <img src="./assets/empty-tasks.svg" alt="">
+                    <div>
+                        <p>Você ainda não tem tarefas cadastradas</p>
+                        <p>Crie tarefas e organize seus itens a fazer</p>
+                    </div>
+                </section>
+
+
+                <ul class="tasks_list">
+                    <li class="task">Estudar C#</li>
+                </ul>
+
+            </main>
         </div>
     </body>
 </html>
