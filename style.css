@@ -122,7 +122,7 @@ header {
 .tasks_counter {
     width: 100%;
     padding: 1.25rem;
-    margin-top: 48px;
+    margin: 48px 0;
     border-top: 3px solid var(--gray-400);
     border-bottom: 3px solid var(--gray-400);
 
@@ -169,10 +169,19 @@ header {
     border-radius: 999px;
 }
 
+.empty_tasks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
 
+    color: var(--gray-300);
+    font-size: 1.3rem;
+}
 
-
-
+.empty_tasks div>p:first-child {
+    font-weight: 700;
+}
 
 
 
