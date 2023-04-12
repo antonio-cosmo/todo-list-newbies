@@ -76,7 +76,8 @@ header {
     border: 1px solid transparent;
 }
 
-.new_task_form input:hover {
+.new_task_form input:hover,
+.new_task_form input:focus {
     border: 1px solid var(--blue-500);
     cursor: pointer;
 }
@@ -116,6 +117,64 @@ header {
     background: var(--black);
     color: var(--gray-200);
 }
+
+
+.tasks_counter {
+    width: 100%;
+    padding: 1.25rem;
+    margin-top: 48px;
+    border-top: 3px solid var(--gray-400);
+    border-bottom: 3px solid var(--gray-400);
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.tasks_counter strong {
+    font-size: 0.875rem;
+}
+
+.all_tasks strong {
+    color: var(--yellow-500);
+}
+
+.all_tasks,
+.done_tasks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.all_tasks span {
+    background: var(--yellow-500);
+    color: var(--yellow-700);
+
+}
+
+.done_tasks strong {
+    color: var(--green-500);
+}
+
+.done_tasks span {
+    background: var(--green-500);
+    color: var(--green-700);
+}
+
+.all_tasks span,
+.done_tasks span {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+
+
+
+
+
+
 
 
 
