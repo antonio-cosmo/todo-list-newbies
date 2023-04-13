@@ -3,9 +3,14 @@ function uid() {
 }
 const taskData = [
     {
-        id: 1,
+        id: uid(),
         name: "Estudar React com TypeScript",
         toDo: true
+    },
+    {
+        id: uid(),
+        name: "Estudar C# e Front End",
+        toDo: false
     }
 ]
 
@@ -13,12 +18,30 @@ const taskData = [
 const taskInput = document.getElementById("task_input");
 const addTaskButton = document.getElementById("new_task_button");
 const tasksList = document.querySelector(".tasks_list");
+const emptyTask = document.querySelector(".empty_tasks");
+const taskTotal = document.querySelector("#todo_count");
+const taskDoneTotal = document.querySelector("#done_count");
 
 function completeTask() { }
+function incompleteTask() { }
 
 function deleteTask() { }
 
+function counter() {
+    let toDoTotal = 0;
+    let doneTotal = 0;
 
+
+    for (let item in taskData) {
+        if (!taskData[item].toDo) {
+            doneTotal++;
+        }
+    }
+
+    toDoTotal = taskData.length;
+    taskTotal.innerHTML = toDoTotal;
+    taskDoneTotal.innerHTML = doneTotal;
+}
 function createElementTask(taskName, taskId) {
     const task = document.createElement("li");
     task.classList.add("task");
@@ -38,6 +61,7 @@ function createElementTask(taskName, taskId) {
     doneIcon.classList.add("ph-check-circle");
     doneIcon.classList.add("check_btn");
     doneIcon.classList.add("hidden");
+    doneIcon.addEventListener("click", incompleteTask);
 
     const name = document.createElement("p");
     name.innerText = taskName;
@@ -72,9 +96,17 @@ function addTask(e) {
     const taskElement = createElementTask(newTask.name, newTask.id);
 
     tasksList.appendChild(taskElement);
-    taskInput.value = ""
+    taskInput.value = "";
+    counter();
 }
 
+if (taskData.length > 0) {
+} else {
+    tasksList.classList.add("hidden");
+    emptyTask.classList.remove("hidden");
+}
+
+counter();
 addTaskButton.addEventListener("click", addTask);
 
 
