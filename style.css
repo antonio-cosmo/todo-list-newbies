@@ -31,9 +31,6 @@ body {
     color: var(--white);
 }
 
-ul {
-    list-style: none;
-}
 
 body,
 input,
@@ -183,7 +180,76 @@ header {
     font-weight: 700;
 }
 
+.tasks_list {
+    list-style: none;
 
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    background: var(--gray-350);
+    padding: 24px;
+    border-radius: 8px;
+}
+
+.task+.task {
+    margin-top: 1rem;
+}
+
+.task>div {
+    display: flex;
+    align-items: center;
+    gap: 16px
+}
+
+.task div i {
+    font-size: 28px;
+}
+
+i:hover {
+    cursor: pointer;
+}
+
+.task .delete_btn {
+    font-size: 24px;
+    color: var(--gray-200);
+}
+
+.task .delete_btn:hover {
+    color: var(--red-500);
+}
+
+/* ------------------ TODO TASK BELOW ------------------- */
+.todo .check_btn {
+    color: var(--gray-200);
+}
+
+.todo .check_btn:hover {
+    color: var(--green-500);
+}
+
+/* ------------------ DONE TASK BELOW ------------------- */
+.done div .risked {
+    text-decoration: line-through;
+    color: var(--gray-200);
+}
+
+.done .check_btn {
+    color: var(--green-500);
+}
+
+.done .check_btn:hover {
+    color: var(--yellow-500);
+}
+
+.hidden {
+    display: none;
+}
 
 
 
