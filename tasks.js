@@ -1,7 +1,7 @@
 function uid() {
     return Date.now().toString(16) + Math.random().toString(16).substring(2);
 }
-const taskData = [
+let taskData = [
     {
         id: uid(),
         name: "Estudar React com TypeScript",
@@ -10,7 +10,7 @@ const taskData = [
     {
         id: uid(),
         name: "Estudar C# e Front End",
-        toDo: false
+        toDo: true
     }
 ]
 
@@ -22,8 +22,52 @@ const emptyTask = document.querySelector(".empty_tasks");
 const taskTotal = document.querySelector("#todo_count");
 const taskDoneTotal = document.querySelector("#done_count");
 
-function completeTask() { }
-function incompleteTask() { }
+function completeTask(e) {
+    const todoIcon = e.target;
+    todoIcon.classList.add("hidden");
+
+    const doneIcon = todoIcon.parentNode.childNodes[1];
+    const text = todoIcon.parentNode.childNodes[2];
+    const task = todoIcon.parentNode.parentNode;
+
+    task.classList.add("done");
+    doneIcon.classList.remove("hidden");
+    text.classList.add("risked");
+
+    taskData = taskData.map(item => {
+        if (item.id === task.id) {
+            item.toDo = !item.toDo
+        }
+
+        return item
+    })
+
+    counter();
+}
+
+function incompleteTask(e) {
+    const doneIcon = e.target;
+    doneIcon.classList.add("hidden");
+
+    const todoIcon = doneIcon.parentNode.childNodes[0]
+    const text = todoIcon.parentNode.childNodes[2];
+    const task = todoIcon.parentNode.parentNode;
+
+    task.classList.add("todo");
+    task.classList.remove("done");
+    todoIcon.classList.remove("hidden");
+    text.classList.remove("risked");
+
+    taskData = taskData.map(item => {
+        if (item.id === task.id) {
+            item.toDo = !item.toDo
+        }
+
+        return item
+    })
+
+    counter();
+}
 
 function deleteTask() { }
 
@@ -42,6 +86,7 @@ function counter() {
     taskTotal.innerHTML = toDoTotal;
     taskDoneTotal.innerHTML = doneTotal;
 }
+
 function createElementTask(taskName, taskId) {
     const task = document.createElement("li");
     task.classList.add("task");
@@ -97,15 +142,26 @@ function addTask(e) {
 
     tasksList.appendChild(taskElement);
     taskInput.value = "";
+    amptyList();
     counter();
 }
 
-if (taskData.length > 0) {
-} else {
-    tasksList.classList.add("hidden");
-    emptyTask.classList.remove("hidden");
+function amptyList() {
+    if (taskData.length > 0) {
+        tasksList.classList.remove("hidden");
+        emptyTask.classList.add("hidden");
+    } else {
+        tasksList.classList.add("hidden");
+        emptyTask.classList.remove("hidden");
+    }
 }
 
+for (let item of taskData) {
+    const el = createElementTask(item.name, item.id);
+    tasksList.appendChild(el);
+}
+
+amptyList();
 counter();
 addTaskButton.addEventListener("click", addTask);
 
