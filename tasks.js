@@ -3,18 +3,17 @@
         return Date.now().toString(16) + Math.random().toString(16).substring(2);
     }
 
-    let taskData = [
-        {
-            id: uid(),
-            name: "Estudar React com TypeScript",
-            toDo: true
-        },
-        {
-            id: uid(),
-            name: "Estudar C# e .NET",
-            toDo: true
-        }
-    ]
+
+    // Task attributes
+    //     {
+    //         id: string,
+    //         name: string,
+    //         toDo: boolean
+    //     }
+
+
+    // Task list
+    let taskData = [];
 
     const taskInput = document.querySelector("#task_input");
     const addTaskButton = document.querySelector("#new_task_button");
@@ -22,6 +21,18 @@
     const emptyTaskList = document.querySelector("#empty_tasks");
     const taskTotal = document.querySelector("#todo_count");
     const taskDoneTotal = document.querySelector("#done_count");
+
+    function setStorage(taskData) {
+        const ls = JSON.stringify(taskData);
+        localStorage.setItem("tasks:newbies", ls);
+    }
+
+    function getStorage() {
+        const storage = localStorage.getItem("tasks:newbies");
+        if (!storage) return [];
+
+        return JSON.parse(storage);
+    }
 
     function counter() {
         let todoTotal = 0;
@@ -69,7 +80,10 @@
         })
 
         counter();
+        setStorage(taskData);
     }
+
+
 
     function incompleteTask(e) {
         const doneIcon = e.target;
@@ -93,6 +107,7 @@
         })
 
         counter();
+        setStorage(taskData);
     }
 
     function deleteTask(e) {
@@ -104,13 +119,14 @@
 
         counter();
         amptyList();
+        setStorage(taskData);
     }
 
 
-    function createElementTask(taskName, taskId) {
+    function createElementTask(taskName, taskId, todoTask = true) {
         const task = document.createElement("li");
         task.classList.add("task");
-        task.classList.add("todo");
+        task.classList.add(todoTask ? "todo" : "done");
         task.setAttribute("id", taskId);
 
         const contentOfLeft = document.createElement("div");
@@ -120,17 +136,20 @@
         todoIcon.classList.add("ph-duotone");
         todoIcon.classList.add("ph-circle-dashed");
         todoIcon.classList.add("check_btn");
+        todoIcon.classList.add(todoTask ? "-" : "hidden");
         todoIcon.addEventListener("click", completeTask);
 
         const doneIcon = document.createElement("i");
         doneIcon.classList.add("ph-duotone");
         doneIcon.classList.add("ph-check-circle");
         doneIcon.classList.add("check_btn");
-        doneIcon.classList.add("hidden");
+        doneIcon.classList.add(todoTask ? "hidden" : "-");
         doneIcon.addEventListener("click", incompleteTask);
 
         const name = document.createElement("p");
+        name.classList.add(todoTask ? "-" : "risked");
         name.innerHTML = taskName;
+
 
         const deleteIcon = document.createElement("i");
         deleteIcon.classList.add("ph-duotone");
@@ -168,16 +187,25 @@
 
         amptyList();
         counter();
+        setStorage(taskData);
     }
 
+    function renderTaskList() {
 
-    for (let item of taskData) {
-        const el = createElementTask(item.name, item.id);
-        tasksList.appendChild(el);
+        const taskStore = getStorage();
+
+        taskData = taskStore;
+
+        for (let item of taskData) {
+            const el = createElementTask(item.name, item.id, item.toDo);
+            tasksList.appendChild(el);
+        }
     }
 
+    addTaskButton.addEventListener("click", addTask);
+
+    renderTaskList();
     amptyList();
     counter();
-    addTaskButton.addEventListener("click", addTask);
 
 })();
