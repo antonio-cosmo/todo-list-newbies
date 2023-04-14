@@ -11,41 +11,39 @@
         },
         {
             id: uid(),
-            name: "Estudar C# e Front End",
+            name: "Estudar C# e .NET",
             toDo: true
         }
     ]
 
-    const taskInput = document.getElementById("task_input");
-    const addTaskButton = document.getElementById("new_task_button");
-    const tasksList = document.querySelector(".tasks_list");
-    const emptyTask = document.querySelector(".empty_tasks");
+    const taskInput = document.querySelector("#task_input");
+    const addTaskButton = document.querySelector("#new_task_button");
+    const tasksList = document.querySelector("#tasks_list");
+    const emptyTaskList = document.querySelector("#empty_tasks");
     const taskTotal = document.querySelector("#todo_count");
     const taskDoneTotal = document.querySelector("#done_count");
 
     function counter() {
-        let toDoTotal = 0;
+        let todoTotal = 0;
         let doneTotal = 0;
 
 
-        for (let item in taskData) {
-            if (!taskData[item].toDo) {
-                doneTotal++;
-            }
+        for (let task of taskData) {
+            if (!task.toDo) doneTotal++;
         }
 
-        toDoTotal = taskData.length;
-        taskTotal.innerHTML = toDoTotal;
+        todoTotal = taskData.length;
+        taskTotal.innerHTML = todoTotal;
         taskDoneTotal.innerHTML = doneTotal;
     }
 
     function amptyList() {
         if (taskData.length > 0) {
             tasksList.classList.remove("hidden");
-            emptyTask.classList.add("hidden");
+            emptyTaskList.classList.add("hidden");
         } else {
+            emptyTaskList.classList.remove("hidden");
             tasksList.classList.add("hidden");
-            emptyTask.classList.remove("hidden");
         }
     }
 
@@ -57,14 +55,15 @@
         const text = todoIcon.parentNode.childNodes[2];
         const task = todoIcon.parentNode.parentNode;
 
+        task.classList.remove("todo");
         task.classList.add("done");
+
         doneIcon.classList.remove("hidden");
         text.classList.add("risked");
 
         taskData = taskData.map(item => {
-            if (item.id === task.id) {
-                item.toDo = !item.toDo
-            }
+
+            if (item.id === task.id) item.toDo = !item.toDo
 
             return item
         })
@@ -80,15 +79,15 @@
         const text = todoIcon.parentNode.childNodes[2];
         const task = todoIcon.parentNode.parentNode;
 
-        task.classList.add("todo");
         task.classList.remove("done");
+        task.classList.add("todo");
+
         todoIcon.classList.remove("hidden");
         text.classList.remove("risked");
 
         taskData = taskData.map(item => {
-            if (item.id === task.id) {
-                item.toDo = !item.toDo
-            }
+
+            if (item.id === task.id) item.toDo = !item.toDo
 
             return item
         })
@@ -114,13 +113,14 @@
         task.classList.add("todo");
         task.setAttribute("id", taskId);
 
-        const contents = document.createElement("div");
+        const contentOfLeft = document.createElement("div");
+        contentOfLeft.classList.add("content_left");
 
-        const toDoIcon = document.createElement("i");
-        toDoIcon.classList.add("ph-duotone");
-        toDoIcon.classList.add("ph-circle-dashed");
-        toDoIcon.classList.add("check_btn");
-        toDoIcon.addEventListener("click", completeTask);
+        const todoIcon = document.createElement("i");
+        todoIcon.classList.add("ph-duotone");
+        todoIcon.classList.add("ph-circle-dashed");
+        todoIcon.classList.add("check_btn");
+        todoIcon.addEventListener("click", completeTask);
 
         const doneIcon = document.createElement("i");
         doneIcon.classList.add("ph-duotone");
@@ -130,7 +130,7 @@
         doneIcon.addEventListener("click", incompleteTask);
 
         const name = document.createElement("p");
-        name.innerText = taskName;
+        name.innerHTML = taskName;
 
         const deleteIcon = document.createElement("i");
         deleteIcon.classList.add("ph-duotone");
@@ -138,11 +138,11 @@
         deleteIcon.classList.add("delete_btn");
         deleteIcon.addEventListener("click", deleteTask)
 
-        contents.appendChild(toDoIcon);
-        contents.appendChild(doneIcon);
-        contents.appendChild(name);
+        contentOfLeft.appendChild(todoIcon);
+        contentOfLeft.appendChild(doneIcon);
+        contentOfLeft.appendChild(name);
 
-        task.appendChild(contents);
+        task.appendChild(contentOfLeft);
         task.appendChild(deleteIcon);
 
         return task;
@@ -151,6 +151,8 @@
     function addTask(e) {
         e.preventDefault();
         const taskText = taskInput.value;
+
+        if (taskText.length <= 0) return;
 
         const newTask = {
             id: uid(),
@@ -163,6 +165,7 @@
 
         tasksList.appendChild(taskElement);
         taskInput.value = "";
+
         amptyList();
         counter();
     }

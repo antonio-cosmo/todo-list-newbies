@@ -44,6 +44,8 @@ button {
     outline: transparent;
 }
 
+/* ------------------ WRAPPER BELOW ------------------- */
+
 .wrapper {
     max-width: 46rem;
     margin: 0 auto;
@@ -53,11 +55,15 @@ button {
     gap: 2rem;
 }
 
+/* ------------------ HEADER BELOW ------------------- */
+
 header {
     display: flex;
     justify-content: center;
     padding: calc(6.75rem - 2rem) 0;
 }
+
+/* ------------------ FORM BELOW ------------------- */
 
 .new_task_form {
     display: flex;
@@ -115,6 +121,7 @@ header {
     color: var(--gray-200);
 }
 
+/* ------------------ TASKS COUNTER BELOW ------------------- */
 
 .tasks_counter {
     width: 100%;
@@ -145,7 +152,7 @@ header {
 
 .all_tasks span {
     background: var(--yellow-500);
-    color: var(--yellow-700);
+    color: var(--black);
 
 }
 
@@ -155,16 +162,19 @@ header {
 
 .done_tasks span {
     background: var(--green-500);
-    color: var(--green-700);
+    color: var(--white);
 }
 
 .all_tasks span,
 .done_tasks span {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     font-weight: 700;
-    padding: 2px 8px;
+    padding: 4px 12px;
     border-radius: 999px;
+
 }
+
+/* ------------------ EMPTY TASKS BELOW ------------------- */
 
 .empty_tasks {
     display: flex;
@@ -180,6 +190,8 @@ header {
     font-weight: 700;
 }
 
+/* ------------------ TASKS LIST BELOW ------------------- */
+
 .tasks_list {
     list-style: none;
 
@@ -188,6 +200,8 @@ header {
     width: 100%;
 
 }
+
+/* ------------------ TASK BELOW ------------------- */
 
 .task {
     display: flex;
@@ -201,13 +215,13 @@ header {
     margin-top: 1rem;
 }
 
-.task>div {
+.task .content_left {
     display: flex;
     align-items: center;
     gap: 16px
 }
 
-.task div i {
+.task .content_left i {
     font-size: 28px;
 }
 
@@ -225,6 +239,7 @@ i:hover {
 }
 
 /* ------------------ TODO TASK BELOW ------------------- */
+
 .todo .check_btn {
     color: var(--gray-200);
 }
@@ -234,6 +249,7 @@ i:hover {
 }
 
 /* ------------------ DONE TASK BELOW ------------------- */
+
 .done div .risked {
     text-decoration: line-through;
     color: var(--gray-200);
@@ -252,6 +268,7 @@ i:hover {
 }
 
 
+/* ------------------ MEDIA QUERIES BELOW ------------------- */
 
 @media (max-width: 768px) {
     html {
